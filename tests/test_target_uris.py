@@ -2,10 +2,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import sys
+
+assert sys.platform.startswith("linux"), "unsupported platform"
+
 import pytest
 from gallia.transports import TargetURI
 from gallia.transports.doip import DoIPConfig
 from gallia.transports.isotp import ISOTPConfig
+from gallia.transports.schemes import TransportScheme
 from pydantic import ValidationError
 
 uris = [
@@ -38,9 +43,9 @@ invalid_uris = [
 def _test_uri(uri: str) -> None:
     parsed_uri = TargetURI(uri)
     match parsed_uri.scheme:
-        case "doip":
+        case TransportScheme.DOIP:
             DoIPConfig(**parsed_uri.qs_flat)
-        case "isotp":
+        case TransportScheme.ISOTP:
             ISOTPConfig(**parsed_uri.qs_flat)
         case _:
             raise ValueError(f"uncovered scheme: {parsed_uri.scheme}")

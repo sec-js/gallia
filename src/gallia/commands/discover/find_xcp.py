@@ -4,7 +4,10 @@
 
 import socket
 import struct
+import sys
 from argparse import ArgumentParser, Namespace
+
+assert sys.platform.startswith("linux"), "unsupported platform"
 
 from gallia.command import AsyncScript
 from gallia.config import Config
@@ -13,7 +16,7 @@ from gallia.services.uds.core.utils import bytes_repr, g_repr
 from gallia.transports import RawCANTransport, TargetURI
 from gallia.utils import auto_int, can_id_repr
 
-logger = get_logger("gallia.discover.xcp")
+logger = get_logger(__name__)
 
 
 class FindXCP(AsyncScript):

@@ -2,13 +2,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from __future__ import annotations
-
 import asyncio
 import errno
 import socket as s
 import struct
+import sys
 from typing import Self
+
+assert sys.platform == "linux", "unsupported platform"
 
 from pydantic import BaseModel, field_validator
 
@@ -16,7 +17,7 @@ from gallia.log import get_logger
 from gallia.transports.base import BaseTransport, TargetURI
 from gallia.utils import auto_int
 
-logger = get_logger("gallia.transport.isotp")
+logger = get_logger(__name__)
 
 # Socket Constants not available in the socket module,
 # see linux/can/isotp.h

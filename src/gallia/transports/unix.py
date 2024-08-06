@@ -2,15 +2,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from __future__ import annotations
-
 import asyncio
+import sys
 from typing import Self
+
+assert sys.platform.startswith("linux"), "unsupported platform"
 
 from gallia.log import get_logger
 from gallia.transports.base import BaseTransport, LinesTransportMixin, TargetURI
 
-logger = get_logger("gallia.transport.unix")
+logger = get_logger(__name__)
 
 
 class UnixTransport(BaseTransport, scheme="unix"):

@@ -3,8 +3,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import asyncio
+import sys
 from argparse import Namespace
 from binascii import unhexlify
+
+assert sys.platform.startswith("linux"), "unsupported platform"
 
 from gallia.command import UDSDiscoveryScanner
 from gallia.log import get_logger
@@ -13,7 +16,7 @@ from gallia.services.uds.core.utils import g_repr
 from gallia.transports import ISOTPTransport, RawCANTransport, TargetURI
 from gallia.utils import auto_int, can_id_repr, write_target_list
 
-logger = get_logger("gallia.discover.isotp")
+logger = get_logger(__name__)
 
 
 class IsotpDiscoverer(UDSDiscoveryScanner):

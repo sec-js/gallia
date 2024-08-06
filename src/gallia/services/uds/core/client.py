@@ -30,7 +30,7 @@ class UDSRequestConfig:
     tags: list[str] | None = None
 
 
-logger = get_logger("gallia.uds.client")
+logger = get_logger(__name__)
 
 
 class UDSClient:
